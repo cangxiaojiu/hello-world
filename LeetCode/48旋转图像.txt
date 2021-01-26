@@ -1,0 +1,38 @@
+1，行列数交换，按列数两头换
+void rotate(int** matrix, int matrixSize, int* matrixColSize){
+    int i=0,j=0,x=0,y=0,c=0;
+    y=*matrixColSize;
+    int** temp=(int**)malloc(sizeof(int*)*y*y);
+    for(i=0;i<y;i++){
+        for(j=0;j<y;j++){
+            matrix[i][j]=matrix[j][i];
+        }
+    }
+    for(c=0;c<y;c++){
+     while(x!=y){
+         temp=matrix[c][x];
+         matrix[c][x]=matrix[c][y];
+         matrix[c][y]=matrix[c][x];
+         x++;
+         y--;
+      }
+     }
+     return matrix;
+}
+错误记录：没结果一堆乱码。
+
+
+2，总结是原啊a[i][j]-->rea[j][n-1-i]
+void rotate(int** matrix, int matrixSize, int* matrixColSize) {
+    int matrix_new[matrixSize][matrixSize];
+    for (int i = 0; i < matrixSize; i++) {
+        for (int j = 0; j < matrixSize; j++) {
+            matrix_new[i][j] = matrix[i][j];
+        }
+    }
+    for (int i = 0; i < matrixSize; ++i) {
+        for (int j = 0; j < matrixSize; ++j) {
+            matrix[j][matrixSize - i - 1] = matrix_new[i][j];
+        }
+    }
+}
