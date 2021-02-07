@@ -1,0 +1,29 @@
+请判断一个链表是否为回文链表。
+
+示例 1:
+
+输入: 1->2
+输出: false
+
+bool isPalindrome(struct ListNode* head){
+    struct ListNode* slow=head,*fast=head,*p,*q=NULL;
+    int count=0;
+    while(fast!=NULL&&fast->next!=NULL){
+        slow=slow->next;
+        fast=fast->next->next;
+    }
+    while(slow!=NULL){
+        p=slow->next;
+        slow->next=q;
+        q=slow;
+        slow=p;
+    }
+    while(head&&q){
+        if(head->val!=q->val){
+            return false;
+        }
+        head=head->next;
+        q=q->next;
+    }
+    return true;
+}
